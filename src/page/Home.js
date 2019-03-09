@@ -1,11 +1,30 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, FlatList, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, FlatList, TouchableOpacity, TextInput} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { createStackNavigator, createAppContainer,createBottomTabNavigator,createDrawerNavigator,DrawerActions} from 'react-navigation';
 // import Modal from './Modal'
+import Menu from '../component/Menu'
 import List from '../component/List'
+import Add from './Add'
+import Profile from './Profile'
+import Lists from './Lists'
 
 class Home extends Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+            click:false,
+            selectItem:null
+        }
+    }
+
+    butonShow(select){
+        this.setState({selectItem:select},()=>{console.warn(this.state.click)})
+    }
+
     render() {
+        
         return (
            
             <View style={styles.container}>
@@ -25,23 +44,33 @@ class Home extends Component {
                              </View>
 
                     </View>
+
                     <View style={styles.search}>
                         <Image source={require('../assets/photo/search.png')}/>
-                        <Text>چی دوست داری بخری؟</Text>
+                        <TextInput placeholder={"چی دوست داری بخری؟"} style={{color:'black',height:45}}></TextInput>
                     </View>
+
                 </View>
 
                 <View style={styles.main}>
+               
 
                     <FlatList 
                         data={List}
+                        extraData={this.state.selectItem}
                         keyExtractor={item => item.title}
-                        renderItem={({item}) => 
-                        <View style={styles.box}>
+                        renderItem={({index,item}) => 
+                        
+                         <View style={!this.state.selectItem ? styles.box : styles.boxOn}>
                             <Text style={styles.textMain}>{item.title}</Text>
-                            <Image source={item.image}
-                            style={styles.flatImage}
-                            />
+                            <View>
+                                <TouchableOpacity onPress={this.butonShow.bind(this,index)}>
+                                <Image source={item.image}
+                                style={styles.flatImage}
+                                />
+                                </TouchableOpacity>
+                            </View>
+
                         </View>
                         }
                     />
@@ -53,14 +82,49 @@ class Home extends Component {
     }
 }
 
-const AppNavigator  = createDrawerNavigator(
+const rootStack  = createBottomTabNavigator(
     {
-      خانه : Home,
+      Home :{
+          screen:Home,
+          navigationOptions:{
+            tabBarLabel:"خانه",
+            tabBarIcon: ({tintColor: color}) => (
+                <Icon name="home" size={23} color={'white'}/>
+            )
+          }
+      },
+        Add:{
+            screen:Add,
+            navigationOptions:{
+                tabBarLabel:"اضافه",
+                tabBarIcon:({tintColor: color}) => (
+                    <Icon name="plus" size={23} color={'white'}/>
+                )
+            }
+        },
+        Profile:{
+            screen:Profile,
+            navigationOptions:{
+                tabBarLabel:"پروفایل",
+                tabBarIcon:({tintColor: color}) => (
+                    <Icon name="user" size={23} color={'white'}/>
+                )
+            }
+        }
     },
-    {
-      drawerWidth : 200,
-      drawerPosition:'right'
-    },
+
+   { 
+       tabBarOptions: {
+                    style:{
+                        backgroundColor: '#3ab1bb',
+                    },
+                    labelStyle :{
+                        color:'white',
+                        fontSize:18
+                    }
+                    
+                  }
+                },
     // {
     //   mode : 'modal'
     // },
@@ -69,12 +133,24 @@ const AppNavigator  = createDrawerNavigator(
     }
   );
 
+  const AppNavigator = createDrawerNavigator(
+      {Home:rootStack},
+      {
+        //   drawerLabel : '+ Create List',
+          drawerBackgroundColor:'#3ab1bb',
+          drawerWidth : 200,
+          drawerPosition:'right',
+          contentComponent:Menu,
+          
+        },
+  )
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
     header:{
-        flex:1,
+        height:120,
         backgroundColor:'#256a75',
     },
     main:{
@@ -87,12 +163,13 @@ const styles = StyleSheet.create({
         width:350,
         height:45,
         backgroundColor:'white',
-        borderRadius:5,
+        borderRadius:8,
         alignItems: 'center',
         justifyContent:'space-between',
         alignSelf: 'center',
-        marginTop:12,
-        padding:10
+        // marginTop:12,
+        padding:10,
+        marginBottom:10,
     },
     navBar:{
         flexDirection:'row',
@@ -115,6 +192,19 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         flexDirection:'row',
         paddingHorizontal:10,
+        elevation:15
+    },
+    boxOn:{
+        width:350,
+        height:160,
+        backgroundColor:'#256a75',
+        borderRadius:10,
+        margin:15,
+        alignItems:'center',
+        justifyContent:'space-between',
+        flexDirection:'row',
+        paddingHorizontal:10,
+        elevation:15
     },
     textMain:{
         color:'white',
@@ -123,7 +213,8 @@ const styles = StyleSheet.create({
     flatImage:{
         width:15,
         height:15
-    }
+    },
+ 
 });
 
 export default createAppContainer(AppNavigator );
