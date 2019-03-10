@@ -8,6 +8,7 @@ import List from '../component/List'
 import Add from './Add'
 import Profile from './Profile'
 import Condition from '../component/Condition'
+import Products from '../component/Products'
 import Lists from './Lists'
 
 class Home extends Component {
@@ -56,7 +57,10 @@ class Home extends Component {
                         extraData={this.state.selectItem}
                         keyExtractor={(item)=> item.title}
                         renderItem={({index,item}) => 
-                            <Condition index={index} item={item}/>
+                            <View>
+                                <Condition index={index} item={item}/>
+                            </View>
+                       
                         }
                     />
 
@@ -137,9 +141,9 @@ const styles = StyleSheet.create({
         backgroundColor:'#256a75',
     },
     main:{
-        flex:4,
+        // flex:4,
         backgroundColor:'white',
-        alignItems:'center'
+        // alignItems:'center'
     },
     search:{
         flexDirection:'row',

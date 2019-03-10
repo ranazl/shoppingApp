@@ -1,11 +1,56 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
-class MyClass extends Component {
+class Products extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>MyClass</Text>
+
+            <View style={styles.main}>
+                <TouchableOpacity>
+                    <Image source={require('../assets/photo/fruits/apple.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={require('../assets/photo/fruits/apricot.png')} style={{marginHorizontal:40}}/>
+                </TouchableOpacity> 
+                <TouchableOpacity>   
+                    <Image source={require('../assets/photo/fruits/bananas.png')}/>
+                </TouchableOpacity>
+                </View>
+                <View style={styles.main}>
+                <TouchableOpacity>
+                    <Image source={require('../assets/photo/fruits/basil.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={require('../assets/photo/fruits/cabbage.png')} style={{marginHorizontal:40}}/>
+                </TouchableOpacity> 
+                <TouchableOpacity>   
+                    <Image source={require('../assets/photo/fruits/celery.png')}/>
+                </TouchableOpacity>
+                </View>
+                <View style={styles.main}>
+                <TouchableOpacity>
+                    <Image source={require('../assets/photo/fruits/cucumber.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={require('../assets/photo/fruits/eggplant.png')} style={{marginHorizontal:40}}/>
+                </TouchableOpacity> 
+                <TouchableOpacity>   
+                    <Image source={require('../assets/photo/fruits/garlic.png')}/>
+                </TouchableOpacity>
+                </View>
+                <View style={styles.main}>
+                <TouchableOpacity>
+                    <Image source={require('../assets/photo/fruits/lettuce.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={require('../assets/photo/fruits/onion.png')} style={{marginHorizontal:40}}/>
+                </TouchableOpacity> 
+                <TouchableOpacity>   
+                    <Image source={require('../assets/photo/fruits/orange.png')}/>
+                </TouchableOpacity>
+                </View>
+               
             </View>
         );
     }
@@ -14,10 +59,16 @@ class MyClass extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#2c3e50',
+        // flexDirection:'row',
+        marginTop:20,
+        // alignItems: 'center',
+        // backgroundColor:'#256a75',
     },
+    main:{
+        flexDirection:'row',
+        marginVertical:15,
+    }
+
 });
 
-export default MyClass;
+export default Products;

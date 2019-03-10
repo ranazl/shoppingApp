@@ -51,6 +51,9 @@ const RootSwitch = createSwitchNavigator(
   {
       App: App,
       Home: Home
+  },
+  {
+    initialRouteName: 'Home'
   }
 );
 
