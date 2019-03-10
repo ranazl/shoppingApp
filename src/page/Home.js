@@ -7,22 +7,18 @@ import Menu from '../component/Menu'
 import List from '../component/List'
 import Add from './Add'
 import Profile from './Profile'
+import Condition from '../component/Condition'
 import Lists from './Lists'
 
 class Home extends Component {
-
     constructor(props){
         super(props);
+        
         this.state={
             click:false,
-            selectItem:null
+            selectItem:'',
         }
     }
-
-    butonShow(select){
-        this.setState({selectItem:select},()=>{console.warn(this.state.click)})
-    }
-
     render() {
         
         return (
@@ -58,20 +54,9 @@ class Home extends Component {
                     <FlatList 
                         data={List}
                         extraData={this.state.selectItem}
-                        keyExtractor={item => item.title}
+                        keyExtractor={(item)=> item.title}
                         renderItem={({index,item}) => 
-                        
-                         <View style={!this.state.selectItem ? styles.box : styles.boxOn}>
-                            <Text style={styles.textMain}>{item.title}</Text>
-                            <View>
-                                <TouchableOpacity onPress={this.butonShow.bind(this,index)}>
-                                <Image source={item.image}
-                                style={styles.flatImage}
-                                />
-                                </TouchableOpacity>
-                            </View>
-
-                        </View>
+                            <Condition index={index} item={item}/>
                         }
                     />
 
@@ -125,9 +110,7 @@ const rootStack  = createBottomTabNavigator(
                     
                   }
                 },
-    // {
-    //   mode : 'modal'
-    // },
+    
     {
       initialRouteName: 'Home',
     }
@@ -136,7 +119,7 @@ const rootStack  = createBottomTabNavigator(
   const AppNavigator = createDrawerNavigator(
       {Home:rootStack},
       {
-        //   drawerLabel : '+ Create List',
+    
           drawerBackgroundColor:'#3ab1bb',
           drawerWidth : 200,
           drawerPosition:'right',
@@ -167,7 +150,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent:'space-between',
         alignSelf: 'center',
-        // marginTop:12,
         padding:10,
         marginBottom:10,
     },
@@ -181,38 +163,6 @@ const styles = StyleSheet.create({
         fontSize:25,
         fontWeight:'bold',
         marginRight:25,
-    },
-    box:{
-        width:350,
-        height:60,
-        backgroundColor:'#256a75',
-        borderRadius:10,
-        margin:15,
-        alignItems:'center',
-        justifyContent:'space-between',
-        flexDirection:'row',
-        paddingHorizontal:10,
-        elevation:15
-    },
-    boxOn:{
-        width:350,
-        height:160,
-        backgroundColor:'#256a75',
-        borderRadius:10,
-        margin:15,
-        alignItems:'center',
-        justifyContent:'space-between',
-        flexDirection:'row',
-        paddingHorizontal:10,
-        elevation:15
-    },
-    textMain:{
-        color:'white',
-        fontSize:18
-    },
-    flatImage:{
-        width:15,
-        height:15
     },
  
 });
