@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Animated,Image,Easing,TouchableOpacity} from 'react-native';
-import Products from './Products'
+
 
 class Condition extends Component {
     constructor(props){
@@ -67,7 +67,10 @@ class Condition extends Component {
                             this.state.click && 
                             
                            
-                                 <Products/>
+                            <View style={styles.boxGreen}>
+                                <View style={{width:20,height:20,backgroundColor:'white'}}></View>
+                                {/* <Text style={styles.text}>{item.title}</Text> */}
+                            </View>
               
                            
                         }
@@ -91,8 +94,6 @@ const styles = StyleSheet.create({
        flex:1,
         //  width:350,
         // height:50,
-        
-        
         alignItems:'center',
         justifyContent:'space-between',
         flexDirection:'row',
@@ -137,6 +138,27 @@ const styles = StyleSheet.create({
         position:'relative',
         paddingRight:20,
     },
+    text:{
+        color:'white',
+        fontWeight:'bold',
+        fontSize:18,
+        paddingVertical:5,
+        alignSelf:'flex-end',
+    },
+    boxGreen:{
+        // flex:1,
+        flexDirection:'row',
+        borderColor:'#123738',
+        borderWidth:1,
+        backgroundColor:'#174849',
+        width:320,
+        paddingVertical:5,
+        justifyContent:'space-between',
+        marginTop:10,
+        alignItems: 'center',
+        paddingHorizontal: 10,
+        elevation:10
+    }
 });
 
 export default Condition;

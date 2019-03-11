@@ -8,7 +8,6 @@ import List from '../component/List'
 import Add from './Add'
 import Profile from './Profile'
 import Condition from '../component/Condition'
-import Products from '../component/Products'
 import Lists from './Lists'
 
 class Home extends Component {
@@ -139,9 +138,10 @@ const styles = StyleSheet.create({
     header:{
         height:120,
         backgroundColor:'#256a75',
+        paddingBottom:15,
     },
     main:{
-        // flex:4,
+        marginBottom:35,
         backgroundColor:'white',
         // alignItems:'center'
     },

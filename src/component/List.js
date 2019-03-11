@@ -8,7 +8,7 @@ export default Lis=[
     {
         id:'2',
         image:require('../assets/photo/arrow.png'),
-        title:'پیشنهاد خرید'
+        title:'خریدهای من'
     },
     {
         id:'3',
