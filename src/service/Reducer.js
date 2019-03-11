@@ -2,12 +2,13 @@ import {
     FETCH_PRODUCTS_BEGIN,
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
+    FETCH_TYPE
   } from "./type";
   
   const initialState = {
     result : [] ,
     id: 0,
-    contacts: [],
+    items: [],
     color: false,
     filter: [],
     filteredData: [],
@@ -26,7 +27,7 @@ import {
         return {
           ...state,
           loading: false,
-          contacts: action.payload,
+          items: action.payload,
           result: action.payload,
           filteredData:action.payload
         };
@@ -36,9 +37,27 @@ import {
           ...state,
           loading: false,
           error: action.payload,
-          contacts: [],
+          items: [],
           result: []
         };
+
+        case FETCH_TYPE:
+           
+        let filteredData=[]
+        if(!action.payload.toUpperCase().include('ALL')){
+            filteredData=
+            state.items.filter(
+                item =>  item.type.toUpperCase().includes(action.payload.toUpperCase())
+            );
+        }
+        else {
+            filteredData = state.items
+        }
+        return {
+            ...state,
+            selectedItem : [...filteredData]
+        };
+
         default:
         return state;
     }

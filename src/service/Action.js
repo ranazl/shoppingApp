@@ -2,6 +2,7 @@ import {
     FETCH_PRODUCTS_BEGIN,
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
+    FETCH_TYPE
   } from "./type";
   
   //fetch
@@ -35,4 +36,14 @@ import {
     type: FETCH_PRODUCTS_FAILURE,
     payload: error
   });
-  
+
+  //setProducts
+  const setType = product => {
+      return{
+        type: FETCH_TYPE,
+        payload: product
+      };
+  };
+  export const setType = product => {
+      return setType(product);
+  };
