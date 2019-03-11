@@ -78,7 +78,21 @@
     { "id": 75, "title": "تن", "type": "meat" },
     { "id": 76, "title": "بیکن", "type": "meat" },
     { "id": 77, "title": "استیک", "type": "meat" },
-    { "id": 78, "title": "صدف", "type": "meat" }
+    { "id": 78, "title": "صدف", "type": "meat" },
+    { "id": 79, "title": "آبنبات", "type": "snacks" },
+    { "id": 80, "title": "شکلات", "type": "snacks" },
+    { "id": 81, "title": "چیپس", "type": "snacks" },
+    { "id": 82, "title": "پفک", "type": "snacks" },
+    { "id": 83, "title": "پفیلا", "type": "snacks" },
+    { "id": 84, "title": "پاستیل", "type": "snacks" },
+    { "id": 85, "title": "اسمارتیز", "type": "snacks" },
+    { "id": 86, "title": "کیک", "type": "snacks" },
+    { "id": 87, "title": "چیپس میوه", "type": "snacks" },
+    { "id": 88, "title": "دسر", "type": "snacks" },
+    { "id": 89, "title": "عسل", "type": "snacks" },
+    { "id": 90, "title": "مربا", "type": "snacks" },
+    { "id": 91, "title": "تخمه", "type": "snacks" },
+    { "id": 92, "title": "ژله", "type": "snacks" }
 
   ]
 }
