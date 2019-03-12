@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, FlatList, TouchableOpacity, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { createStackNavigator, createAppContainer,createBottomTabNavigator,createDrawerNavigator,DrawerActions} from 'react-navigation';
-// import Modal from './Modal'
 import Menu from '../component/Menu'
 import List from '../component/List'
 import Add from './Add'
 import Profile from './Profile'
 import Condition from '../component/Condition'
-import Lists from './Lists'
 
 class Home extends Component {
+
     constructor(props){
         super(props);
         
@@ -55,7 +54,7 @@ class Home extends Component {
                         data={List}
                         extraData={this.state.selectItem}
                         keyExtractor={(item)=> item.title}
-                        renderItem={({index,item}) => 
+                        renderItem={({index,item,type}) => 
                             <View>
                                 <Condition index={index} item={item}/>
                             </View>

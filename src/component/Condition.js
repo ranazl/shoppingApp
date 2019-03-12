@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Animated,Image,Easing,TouchableOpacity} from 'react-native';
-
+import { View, Text, StyleSheet, Animated,Image,Easing,TouchableOpacity,FlatList} from 'react-native';
+import{connect} from 'react-redux'
+import {setType,fetchProducts } from '../service/Action'
+// import FlatListt from './FlatListt'
 
 class Condition extends Component {
+
+    componentDidMount(){
+        this.props.fetchProducts() 
+    }
+
     constructor(props){
         super(props);
         
@@ -40,12 +47,13 @@ class Condition extends Component {
     //     ).start()
     //   }
 
-    butonShow(index){
+    butonShow(index , type){
         this.setState({
             selectItem:index,
             click: !this.state.click
         })
-//    this.animOn(),this.animOff()
+        
+        this.props.setType(type)
     }
     render() {
         return (
@@ -53,7 +61,7 @@ class Condition extends Component {
                         <View style={ styles.box}>
                             <Text style={styles.textMain}>{this.props.item.title}</Text>
                             <View>
-                                <TouchableOpacity onPress={this.butonShow.bind(this,this.props.index)}>
+                                <TouchableOpacity onPress={this.butonShow.bind(this,this.props.index,this.props.item.type)}>
                                     <Image source={this.props.item.image}
                                     style={styles.flatImage}
                                     />
@@ -67,10 +75,18 @@ class Condition extends Component {
                             this.state.click && 
                             
                            
+                            <FlatList
+                            data={this.props.selectedItem}
+                            keyExtractor={item => item.id}
+                            renderItem={({item,index})=>
+        
                             <View style={styles.boxGreen}>
                                 <View style={{width:20,height:20,backgroundColor:'white'}}></View>
-                                {/* <Text style={styles.text}>{item.title}</Text> */}
+                                <Text style={styles.text}>{item.title}</Text>
                             </View>
+
+                        }
+                        />
               
                            
                         }
@@ -92,8 +108,6 @@ const styles = StyleSheet.create({
     },
     box:{
        flex:1,
-        //  width:350,
-        // height:50,
         alignItems:'center',
         justifyContent:'space-between',
         flexDirection:'row',
@@ -101,14 +115,12 @@ const styles = StyleSheet.create({
         
     },
     boxOn:{
-       // flex:1,
         width:350,
        height:300,
        backgroundColor:'#256a75',
        borderRadius:10,
        margin:15,
        alignItems:'center',
-    //    justifyContent:'space-between',
        flexDirection:'row',
        paddingHorizontal:10,
        elevation:15
@@ -146,7 +158,6 @@ const styles = StyleSheet.create({
         alignSelf:'flex-end',
     },
     boxGreen:{
-        // flex:1,
         flexDirection:'row',
         borderColor:'#123738',
         borderWidth:1,
@@ -161,4 +172,11 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Condition;
+const mapStateToProps = state => {
+    return {
+        selectedItem: state.selectedItem,
+    };
+  };
+  
+
+export default connect( mapStateToProps ,{setType,fetchProducts})(Condition)

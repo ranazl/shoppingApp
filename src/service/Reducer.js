@@ -3,15 +3,13 @@ import {
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
     FETCH_TYPE
-  } from "./type";
+  } from './Type';
   
   const initialState = {
-    result : [] ,
     id: 0,
     items: [],
-    color: false,
+    selectedItem : [],
     filter: [],
-    filteredData: [],
   };
   
   function reducer(state = initialState, action) {
@@ -28,8 +26,7 @@ import {
           ...state,
           loading: false,
           items: action.payload,
-          result: action.payload,
-          filteredData:action.payload
+          selectedItem: action.payload,
         };
   
       case FETCH_PRODUCTS_FAILURE:
@@ -38,21 +35,19 @@ import {
           loading: false,
           error: action.payload,
           items: [],
-          result: []
+          selectedItem: []
         };
 
         case FETCH_TYPE:
+       
            
         let filteredData=[]
-        if(!action.payload.toUpperCase().include('ALL')){
+      
             filteredData=
             state.items.filter(
                 item =>  item.type.toUpperCase().includes(action.payload.toUpperCase())
             );
-        }
-        else {
-            filteredData = state.items
-        }
+            // console.warn ("gg: " + filteredData)
         return {
             ...state,
             selectedItem : [...filteredData]

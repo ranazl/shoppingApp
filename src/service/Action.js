@@ -3,21 +3,19 @@ import {
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
     FETCH_TYPE
-  } from "./type";
-  
+  } from './Type';
+
   //fetch
   export const fetchProducts = () => {
     return dispatch => {
+         
       dispatch(fetchProductsBegin());
-      return (
-        fetch("https://10.0.2.2:3000/products")
-          // .then(handleErrors)
-          .then(res => res.json())
-          .then(json => {
-            dispatch(fetchProductsSuccess(json));
-          })
-          .catch(error => dispatch(fetchProductsFailure(error)))
-      );
+      fetch("http://10.0.2.2:3000/products")
+        .then(data =>  data.json())
+        .then(data => {
+          dispatch(fetchProductsSuccess(data));
+        })
+        .catch(error => dispatch(fetchProductsFailure(error)));
     };
   };
   
@@ -37,13 +35,15 @@ import {
     payload: error
   });
 
-  //setProducts
-  const setType = product => {
-      return{
-        type: FETCH_TYPE,
-        payload: product
-      };
-  };
-  export const setType = product => {
-      return setType(product);
+  //setType
+  const setTypeAction = type => {
+  
+    return {
+      type :FETCH_TYPE,
+      payload : type
+    }
+  }
+  export const setType = type => {
+    
+      return setTypeAction(type);
   };
