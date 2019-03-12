@@ -2,7 +2,8 @@ import {
     FETCH_PRODUCTS_BEGIN,
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
-    FETCH_TYPE
+    FETCH_TYPE,
+    SEARCH_ITEM
   } from './Type';
 
   //fetch
@@ -46,4 +47,16 @@ import {
   export const setType = type => {
     
       return setTypeAction(type);
+  };
+
+  //search
+  const setSearchAction = text => {
+
+    return{
+      type: SEARCH_ITEM,
+      payload: text
+    }
+  }
+  export const setSearch = text => {
+    return setSearchAction(text);
   };

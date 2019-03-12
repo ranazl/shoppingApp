@@ -20,6 +20,11 @@ class Home extends Component {
             selectItem:'',
         }
     }
+
+    searchFilter = text => {
+        this.props.setSearch(text)
+    }
+
     render() {
         
         return (
@@ -44,7 +49,11 @@ class Home extends Component {
 
                     <View style={styles.search}>
                         <Image source={require('../assets/photo/search.png')}/>
-                        <TextInput placeholder={"چی دوست داری بخری؟"} style={{color:'black',height:45}}></TextInput>
+                        <TextInput placeholder={"چی دوست داری بخری؟"} 
+                        style={{color:'black',height:45}}
+                        onChangeText={this.searchFilter.bind(this)}
+                        >
+                        </TextInput>
                     </View>
 
                 </View>

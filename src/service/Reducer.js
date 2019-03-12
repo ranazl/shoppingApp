@@ -2,7 +2,8 @@ import {
     FETCH_PRODUCTS_BEGIN,
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
-    FETCH_TYPE
+    FETCH_TYPE,
+    SEARCH_ITEM
   } from './Type';
   
   const initialState = {
@@ -47,10 +48,21 @@ import {
             state.items.filter(
                 item =>  item.type.toUpperCase().includes(action.payload.toUpperCase())
             );
-            // console.warn ("gg: " + filteredData)
         return {
             ...state,
             selectedItem : [...filteredData]
+        };
+
+        //search
+        case SEARCH_ITEM:
+
+        let filteredDatas = 
+        state.selectedItem.filter(item => 
+            item.text.toUpperCase().includes(action.payload.toUpperCase())
+        );
+    return {
+        ...state,
+        selectedItem : [...filteredDatas]
         };
 
         default:
