@@ -58,19 +58,19 @@ class Condition extends Component {
     render() {
         return (
             <View style={styles.container}>
-                        <View style={ styles.box}>
+                        <TouchableOpacity onPress={this.butonShow.bind(this,this.props.index,this.props.item.type)} style={ styles.box}>
                             <Text style={styles.textMain}>{this.props.item.title}</Text>
                             <View>
-                                <TouchableOpacity onPress={this.butonShow.bind(this,this.props.index,this.props.item.type)}>
+                                
                                     <Image source={this.props.item.image}
                                     style={styles.flatImage}
                                     />
-                                </TouchableOpacity>
                        
                             </View>
-                        
+                            </TouchableOpacity>
 
-                        </View>
+                        
+                     
                         {
                             this.state.click && 
                             
