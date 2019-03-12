@@ -39,14 +39,14 @@ export default Lis=[
     {
         id:'7',
         image:require('../assets/photo/arrow.png'),
-        title:'ادویه جات',
-        type:''
+        title:'حبوبات و ادویه جات',
+        type:'spices'
     },
     {
         id:'8',
         image:require('../assets/photo/arrow.png'),
         title:'محصولات تولید شده ازغلات',
-        type:''
+        type:'Grains'
     },
     {
         id:'9',
@@ -58,13 +58,13 @@ export default Lis=[
         id:'10',
         image:require('../assets/photo/arrow.png'),
         title:'نوشیدنی',
-        type:''
+        type:'Beverages'
     },
     {
         id:'11',
         image:require('../assets/photo/arrow.png'),
         title:'غذای حیوانات خانگی',
-        type:''
+        type:'pets'
     },
 
 ]

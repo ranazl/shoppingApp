@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Animated,Image,Easing,TouchableOpacity,FlatList} from 'react-native';
 import{connect} from 'react-redux'
-import {setType,fetchProducts } from '../service/Action'
+import {setType} from '../service/Action'
 // import FlatListt from './FlatListt'
 
 class Condition extends Component {
 
-    componentDidMount(){
-        this.props.fetchProducts() 
-    }
+   
 
     constructor(props){
         super(props);
@@ -179,4 +177,4 @@ const mapStateToProps = state => {
   };
   
 
-export default connect( mapStateToProps ,{setType,fetchProducts})(Condition)
+export default connect( mapStateToProps ,{setType})(Condition)

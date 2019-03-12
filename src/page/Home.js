@@ -7,6 +7,8 @@ import List from '../component/List'
 import Add from './Add'
 import Profile from './Profile'
 import Condition from '../component/Condition'
+import{connect} from 'react-redux'
+import {fetchProducts } from '../service/Action'
 
 class Home extends Component {
 
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
         paddingBottom:15,
     },
     main:{
-        marginBottom:35,
+        marginBottom:120,
         backgroundColor:'white',
         // alignItems:'center'
     },
@@ -170,4 +172,14 @@ const styles = StyleSheet.create({
  
 });
 
-export default createAppContainer(AppNavigator );
+const AppContainer = createAppContainer(AppNavigator);
+ class App extends Component {
+    componentDidMount (){
+      this.props.fetchProducts();
+    }
+    render() {
+      return <AppContainer />;
+    }
+  }
+
+export default connect( null,{fetchProducts})(App)
