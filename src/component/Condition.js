@@ -10,7 +10,7 @@ import {
   FlatList
 } from "react-native";
 import { connect } from "react-redux";
-import { setType } from "../service/Action";
+import { setType,setChange } from "../service/Action";
 // import FlatListt from './FlatListt'
 
 class Condition extends Component {
@@ -52,11 +52,13 @@ class Condition extends Component {
   //     ).start()
   //   }
 
-  checkBox(index) {
+  checkBox(index,id) {
     this.setState({
       selectItem: index,
+      selectionId:id,
       correct: !this.state.correct
     });
+    this.props.setChange(index);
   }
 
   butonShow(index, type) {
@@ -87,12 +89,12 @@ class Condition extends Component {
         {this.state.click && (
           <FlatList
             data={this.props.selectedItem}
-            extraData={this.state.selectItem}
+            extraData={[this.state.selectItem,this.state.selectionId]}
             keyExtractor={item => item.id}
             renderItem={({ item, index }) => (
               <TouchableOpacity
                 
-                onPress={this.checkBox.bind(this, this.props.index)}
+                onPress={this.checkBox.bind(this, this.props.item.id)}
               >
                 {!this.state.correct && (
                   <View style={styles.boxGreen}>
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   boxOn: {
     width: 350,
@@ -195,11 +197,12 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    selectedItem: state.selectedItem
+    selectedItem: state.selectedItem,
+    selectionId : state.selectionId 
   };
 };
 
 export default connect(
   mapStateToProps,
-  { setType }
+  { setType,setChange }
 )(Condition);

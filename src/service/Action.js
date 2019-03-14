@@ -3,7 +3,8 @@ import {
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
     FETCH_TYPE,
-    SEARCH_ITEM
+    SEARCH_ITEM,
+    SET_CHANGE_COLOR
   } from './Type';
 
   //fetch
@@ -57,6 +58,20 @@ import {
       payload: text
     }
   }
+
   export const setSearch = text => {
     return setSearchAction(text);
+  };
+
+  //changeColor
+  const setChangeAction = id => {
+
+    return{
+      type: SET_CHANGE_COLOR,
+      payload: id
+    }
+  }
+
+  export const setChange = id => {
+    return setChangeAction(id);
   };

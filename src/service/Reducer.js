@@ -3,7 +3,8 @@ import {
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
     FETCH_TYPE,
-    SEARCH_ITEM
+    SEARCH_ITEM,
+    SET_CHANGE_COLOR
   } from './Type';
   
   const initialState = {
@@ -11,6 +12,8 @@ import {
     items: [],
     selectedItem : [],
     filter: [],
+    color: false,
+    SelectionId:[]
   };
   
   function reducer(state = initialState, action) {
@@ -64,6 +67,14 @@ import {
         ...state,
         selectedItem : [...filteredDatas]
         };
+
+        //changeColor
+        case SET_CHANGE_COLOR:
+        return{
+          ...state,
+          SelectionId :[...state.selectedId , action.payload ]
+
+        }
 
         default:
         return state;
