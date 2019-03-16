@@ -52,13 +52,14 @@ class Condition extends Component {
   //     ).start()
   //   }
 
-  checkBox(index,id) {
+  checkBox(index) {
     this.setState({
-      selectItem: index,
-      selectionId:id,
-      correct: !this.state.correct
+      // selectItem: index,
+      // selectionId:id,
+      correct: !this.state.correct 
     });
     this.props.setChange(index);
+    this.props.update(index)
   }
 
   butonShow(index, type) {
@@ -92,26 +93,33 @@ class Condition extends Component {
             extraData={[this.state.selectItem,this.state.selectionId]}
             keyExtractor={item => item.id}
             renderItem={({ item, index }) => (
-              <TouchableOpacity
+            <View>
+                {
+                item.selected &&
+                <TouchableOpacity
                 
-                onPress={this.checkBox.bind(this, this.props.item.id)}
+                onPress={this.checkBox.bind(this, item.id)}
               >
-                {!this.state.correct && (
+                
                   <View style={styles.boxGreen}>
                     <Image
                       source={require("../assets/photo/verifiedOff.png")}
                     />
                     <Text style={styles.text}>{item.title}</Text>
                   </View>
-                )}
-
-                {this.state.correct && (
-                  <View style={styles.boxGreen}>
-                    <Image source={require("../assets/photo/verifiedOn.png")} />
-                    <Text style={styles.text}>{item.title}</Text>
-                  </View>
-                )}
+              
               </TouchableOpacity>
+              }
+              {
+                !item.selected &&
+                  <View style={styles.boxGreen}>
+                  <Image source={require("../assets/photo/verifiedOn.png")} />
+                  <Text style={styles.text}>{item.title}</Text>
+                </View>
+              }
+
+            </View>
+             
             )}
           />
         )}
