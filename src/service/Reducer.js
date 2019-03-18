@@ -2,6 +2,9 @@ import {
     FETCH_PRODUCTS_BEGIN,
     FETCH_PRODUCTS_SUCCESS,
     FETCH_PRODUCTS_FAILURE,
+    FETCH_LIST_BEGIN,
+    FETCH_LIST_SUCCESS,
+    FETCH_LIST_FAILURE,
     FETCH_TYPE,
     SEARCH_ITEM,
     SET_CHANGE_COLOR,
@@ -29,14 +32,13 @@ import {
         return {
           ...state,
           loading: true,
-          error: null
+          error: null,
+          selectedItem:[]
         };
   
       case FETCH_PRODUCTS_SUCCESS:
         return {
           ...state,
-          loading: false,
-          items: action.payload,
           selectedItem: action.payload,
         };
   
@@ -47,6 +49,32 @@ import {
           error: action.payload,
           items: [],
           selectedItem: []
+        };
+//List
+        case FETCH_LIST_BEGIN:
+        
+        return {
+          ...state,
+          loading: true,
+          error: null
+        };
+  
+      case FETCH_LIST_SUCCESS:
+      
+        return {
+          ...state,
+          loading: false,
+          items: action.payload,
+          todoData: action.payload,
+        };
+  
+      case FETCH_LIST_FAILURE:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+          items: [],
+          todoData: []
         };
 
         case FETCH_TYPE:
@@ -77,9 +105,22 @@ import {
 
         //changeColor
         case SET_CHANGE_COLOR:
+            let itemIndex = state.selectedItem.findIndex((p => p.id === action.payload.id));
+            let item = state.selectedItem[itemIndex];
+            
         return{
           ...state,
-          SelectionId :[...state.selectionId , action.payload ]
+          
+          selectedItem: [
+            ...state.selectedItem.slice(0, itemIndex),
+            {
+              "id": action.payload.id,
+              "title": action.payload.title,
+              "listId":action.payload.listId,
+              "selected": !action.payload.selected
+            },
+            ...state.selectedItem.slice(itemIndex + 1),
+        ]
 
         }
 
@@ -103,26 +144,11 @@ import {
           ...state,
           addArray:[
             ...state.addArray.slice(0,action.payload),
+            {...state,selected:true},
             ...state.addArray.slice(action.payload+1),
           ]
         }
 
-        case ADD_TODO: {
-          return {
-              ...state,
-              todoData: [...state.todoData, action.payload]
-          }
-      }
-      case DELETE_TODO : {
-          let itemIndex = state.todoData.findIndex((p => p.id === action.payload));
-          return {
-              ...state,
-              todoData: [
-                  ...state.todoData.slice(0, itemIndex),
-                  ...state.todoData.slice(itemIndex + 1),
-              ]
-          }
-      }
 
         default:
         return state;

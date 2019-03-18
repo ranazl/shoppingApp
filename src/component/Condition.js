@@ -10,8 +10,7 @@ import {
   FlatList
 } from "react-native";
 import { connect } from "react-redux";
-import { setType,setChange } from "../service/Action";
-// import FlatListt from './FlatListt'
+import { setType,setChange,update,fetchProducts,fetchList } from "../service/Action";
 
 class Condition extends Component {
   constructor(props) {
@@ -19,8 +18,6 @@ class Condition extends Component {
 
     this.state = {
       click: false,
-      selectItem: 0,
-      correct: false
       //     animValueOff:new Animated.Value(350),
       //     animValueOn:new Animated.Value(50)
     };
@@ -51,24 +48,25 @@ class Condition extends Component {
   //       }
   //     ).start()
   //   }
+ 
+  checkBox(id , item) {
 
-  checkBox(index) {
     this.setState({
       // selectItem: index,
       // selectionId:id,
       correct: !this.state.correct 
     });
-    this.props.setChange(index);
-    this.props.update(index)
+    
+    this.props.update(id , item)
   }
 
-  butonShow(index, type) {
+  butonShow(index, id) {
     this.setState({
       selectItem: index,
       click: !this.state.click
     });
 
-    this.props.setType(type);
+    this.props.fetchProducts(id)
   }
   render() {
     return (
@@ -77,30 +75,28 @@ class Condition extends Component {
           onPress={this.butonShow.bind(
             this,
             this.props.index,
-            this.props.item.type
+            this.props.item.id
           )}
           style={styles.box}
         >
           <Text style={styles.textMain}>{this.props.item.title}</Text>
           <View>
-            <Image source={this.props.item.image} style={styles.flatImage} />
+            <Image source={{uri:this.props.item.image}} style={styles.flatImage} />
           </View>
         </TouchableOpacity>
 
-        {this.state.click && (
+        {this.state.click  && (
           <FlatList
             data={this.props.selectedItem}
-            extraData={[this.state.selectItem,this.state.selectionId]}
+            // extraData={[this.state.selectItem]}
             keyExtractor={item => item.id}
             renderItem={({ item, index }) => (
             <View>
                 {
-                item.selected &&
+                !item.selected  &&
                 <TouchableOpacity
-                
-                onPress={this.checkBox.bind(this, item.id)}
+                onPress={this.checkBox.bind(this, item.id , item)}
               >
-                
                   <View style={styles.boxGreen}>
                     <Image
                       source={require("../assets/photo/verifiedOff.png")}
@@ -111,15 +107,17 @@ class Condition extends Component {
               </TouchableOpacity>
               }
               {
-                !item.selected &&
+                item.selected &&
+                <TouchableOpacity
+                onPress={this.checkBox.bind(this, item.id , item)} >
+
                   <View style={styles.boxGreen}>
                   <Image source={require("../assets/photo/verifiedOn.png")} />
                   <Text style={styles.text}>{item.title}</Text>
                 </View>
+              </TouchableOpacity>
               }
-
             </View>
-             
             )}
           />
         )}
@@ -178,7 +176,7 @@ const styles = StyleSheet.create({
   flatImage: {
     width: 15,
     height: 15,
-    position: "relative",
+    // position: "relative",
     paddingRight: 20
   },
   text: {
@@ -206,11 +204,12 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     selectedItem: state.selectedItem,
-    selectionId : state.selectionId 
+    // loading : state.loading
+    // selectionId : state.selectionId 
   };
 };
 
 export default connect(
   mapStateToProps,
-  { setType,setChange }
+  { setType,setChange,update,fetchProducts,fetchList }
 )(Condition);

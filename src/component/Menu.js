@@ -11,13 +11,12 @@ class Menu extends Component {
       <View style={styles.container}>
  
         <View>
-            <Image source={require('../assets/photo/1.jpg')}
+            <Image source={require('../assets/photo/images.png')}
             style={styles.picture} />
         </View>
 
         <View style={{alignItems:'center',justifyContent:'center'}}>
-            <Text style={styles.text}>Rana</Text>
-            <Text style={styles.text}>Zolfaghari</Text>
+            <Text style={styles.text}>شروع کن</Text>
             <View style={styles.line}></View>
             <TouchableOpacity>
                 <Text style={styles.textList}>+ ساختن لیست جدید</Text>
@@ -41,9 +40,8 @@ const styles = StyleSheet.create({
         width:70,
         height:70,
         borderRadius: 100,
-        borderColor:"white",
-        borderWidth:1,
         marginTop:10,
+        marginBottom:10,
     },
     text:{
         fontSize:16,

@@ -88,9 +88,10 @@ const styles = StyleSheet.create({
     main:{
         flex:3,
         backgroundColor:'white',
-        alignItems:'center',
+        alignItems:'flex-end',
         justifyContent:'center',
-        marginRight:10,
+        // backgroundColor:'red',
+        margin:20
     },
     footer:{
         flex:1,
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     text:{
         color:'black',
         fontSize:18,
-        fontWeight:'bold'
+        fontWeight:'bold',
     }
 });
 

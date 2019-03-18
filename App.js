@@ -4,6 +4,8 @@ import { View, Text, StyleSheet,FlatList } from 'react-native';
 import thunk from "redux-thunk";
 import {Provider}  from 'react-redux';
 import Home from './src/page/Home'
+import AppTemp from './src/component/homeContinue'
+import AppNavigator from './src/component/homeContinue'
 // import First from './src/page/First'
 import reducer from './src/service/Reducer'
 
