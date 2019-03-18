@@ -107,10 +107,10 @@ export const setSearch = text => {
 };
 
 //changeColor
-const setChangeAction = (item ) => {
+const setChangeAction = (id ) => {
   return {
     type: SET_CHANGE_COLOR,
-    payload: item
+    payload: id
   };
 };
 
@@ -154,7 +154,7 @@ export const failed = id => ({
   payload: id
 });
 
-export const update = (id , item) => {
+export const update = (item) => {
   
   return dispatch => {
     let check = !item.selected;
@@ -162,7 +162,7 @@ export const update = (id , item) => {
       selected: !item.selected
     };
     const url = "http://10.0.2.2:3000/products/";
-    fetch(`${url}${id}/?selected=${check}`, {
+    fetch(`${url}${item.id}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -170,9 +170,9 @@ export const update = (id , item) => {
       },
       body: JSON.stringify(data)
     })
-      .then(response => response.json())
+      // .then(response => response.json())
       .then(data => {
-        dispatch(setChangeAction( item));
+        dispatch(setChangeAction(item.id));
       });
   };
 };

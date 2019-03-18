@@ -22,7 +22,7 @@
       "id": 38,
       "title": "تخم مرغ",
       "listId": 4,
-      "selected": true
+      "selected": false
     },
     {
       "id": 39,
@@ -76,7 +76,7 @@
       "id": 47,
       "title": "بربری",
       "listId": 3,
-      "selected": false
+      "selected": true
     },
     {
       "id": 48,
@@ -220,7 +220,7 @@
       "id": 71,
       "title": "کالباس",
       "listId": 5,
-      "selected": false
+      "selected": true
     },
     {
       "id": 72,
@@ -268,19 +268,19 @@
       "id": 79,
       "title": "آبنبات",
       "listId": 8,
-      "selected": false
+      "selected": true
     },
     {
       "id": 80,
       "title": "شکلات",
       "listId": 8,
-      "selected": false
+      "selected": true
     },
     {
       "id": 81,
       "title": "چیپس",
       "listId": 8,
-      "selected": false
+      "selected": true
     },
     {
       "id": 82,

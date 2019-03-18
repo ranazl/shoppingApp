@@ -49,15 +49,9 @@ class Condition extends Component {
   //     ).start()
   //   }
  
-  checkBox(id , item) {
-
-    this.setState({
-      // selectItem: index,
-      // selectionId:id,
-      correct: !this.state.correct 
-    });
+  checkBox(item) {
     
-    this.props.update(id , item)
+    this.props.update(item)
   }
 
   butonShow(index, id) {
@@ -95,7 +89,7 @@ class Condition extends Component {
                 {
                 !item.selected  &&
                 <TouchableOpacity
-                onPress={this.checkBox.bind(this, item.id , item)}
+                onPress={this.checkBox.bind(this, item)}
               >
                   <View style={styles.boxGreen}>
                     <Image
@@ -109,7 +103,7 @@ class Condition extends Component {
               {
                 item.selected &&
                 <TouchableOpacity
-                onPress={this.checkBox.bind(this, item.id , item)} >
+                onPress={this.checkBox.bind(this,item)} >
 
                   <View style={styles.boxGreen}>
                   <Image source={require("../assets/photo/verifiedOn.png")} />

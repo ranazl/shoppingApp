@@ -105,7 +105,7 @@ import {
 
         //changeColor
         case SET_CHANGE_COLOR:
-            let itemIndex = state.selectedItem.findIndex((p => p.id === action.payload.id));
+            let itemIndex = state.selectedItem.findIndex((p => p.id === action.payload));
             let item = state.selectedItem[itemIndex];
             
         return{
@@ -114,10 +114,8 @@ import {
           selectedItem: [
             ...state.selectedItem.slice(0, itemIndex),
             {
-              "id": action.payload.id,
-              "title": action.payload.title,
-              "listId":action.payload.listId,
-              "selected": !action.payload.selected
+              ...item,
+              "selected": !item.selected
             },
             ...state.selectedItem.slice(itemIndex + 1),
         ]
